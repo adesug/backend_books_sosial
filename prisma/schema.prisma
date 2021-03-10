@@ -20,7 +20,6 @@ model tb_user {
 }
 
 model tb_buku {
-  id_buku   Int          @id @default(autoincrement())
   id_user     Int
   judul_buku  String       @db.VarChar(100)
   pengarang   String       @db.VarChar(70)
@@ -29,13 +28,13 @@ model tb_buku {
   pages       Int
   img_buku    String       @db.VarChar(50)
   id_kategori Int?
+  id_buku     Int          @id @default(autoincrement())
   tb_kategori tb_kategori? @relation(fields: [id_kategori], references: [id_kategori])
   tb_user     tb_user      @relation(fields: [id_user], references: [id_user])
 }
 
 model tb_kategori {
   id_kategori   Int       @id @default(autoincrement())
-  id_buku       Int
   nama_kategori String    @db.VarChar(50)
   img_kategori  String    @db.VarChar(200)
   tb_buku       tb_buku[]
