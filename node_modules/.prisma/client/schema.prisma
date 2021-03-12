@@ -8,29 +8,33 @@ datasource db {
 }
 
 model tb_user {
-  id_user    Int       @id @default(autoincrement())
-  fullname   String    @db.VarChar(70)
-  username   String    @db.VarChar(30)
-  gender     String    @db.VarChar(10)
-  alamat     String    @db.VarChar(100)
-  email      String    @db.VarChar(50)
+  id_user    Int         @id @default(autoincrement())
+  fullname   String      @db.VarChar(70)
+  username   String      @db.VarChar(30)
+  gender     String      @db.VarChar(10)
+  alamat     String      @db.VarChar(100)
+  email      String      @db.VarChar(50)
   password   String
-  img_profil String    @db.VarChar(50)
+  img_profil String      @db.VarChar(50)
   tb_buku    tb_buku[]
+  tb_rating  tb_rating[]
 }
 
 model tb_buku {
-  id_user     Int
-  judul_buku  String       @db.VarChar(100)
-  pengarang   String       @db.VarChar(70)
-  publisher   String       @db.VarChar(50)
-  isbn        Int
-  pages       Int
-  img_buku    String       @db.VarChar(50)
-  id_kategori Int?
-  id_buku     Int          @id @default(autoincrement())
-  tb_kategori tb_kategori? @relation(fields: [id_kategori], references: [id_kategori])
-  tb_user     tb_user      @relation(fields: [id_user], references: [id_user])
+  id_user                              Int
+  judul_buku                           String       @db.VarChar(100)
+  pengarang                            String       @db.VarChar(70)
+  publisher                            String       @db.VarChar(50)
+  isbn                                 Int
+  pages                                Int
+  img_buku                             String       @db.VarChar(200)
+  id_kategori                          Int?
+  id_buku                              Int          @id @default(autoincrement())
+  id_rating                            Int?
+  tb_kategori                          tb_kategori? @relation(fields: [id_kategori], references: [id_kategori])
+  tb_rating                            tb_rating?   @relation(fields: [id_rating], references: [id_rating])
+  tb_user                              tb_user      @relation(fields: [id_user], references: [id_user])
+  tb_rating_tb_bukuTotb_rating_id_buku tb_rating[]  @relation("tb_bukuTotb_rating_id_buku")
 }
 
 model tb_kategori {
@@ -38,4 +42,15 @@ model tb_kategori {
   nama_kategori String    @db.VarChar(50)
   img_kategori  String    @db.VarChar(200)
   tb_buku       tb_buku[]
+}
+
+model tb_rating {
+  id_rating                          Int       @id @default(autoincrement())
+  rating                             Int
+  id_buku                            Int?
+  id_user                            Int?
+  komentar                           String?   @db.VarChar(200)
+  tb_buku_tb_bukuTotb_rating_id_buku tb_buku?  @relation("tb_bukuTotb_rating_id_buku", fields: [id_buku], references: [id_buku])
+  tb_user                            tb_user?  @relation(fields: [id_user], references: [id_user])
+  tb_buku                            tb_buku[]
 }

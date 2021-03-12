@@ -6,6 +6,7 @@ module.exports = {
         const {body} = req
         const newData = {
             ...body,
+            // id_buku : Number (body.id_buku)
             
             
         }

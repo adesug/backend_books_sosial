@@ -16,7 +16,12 @@ module.exports = {
                     select: {
                       username: true,
                     }
-                  }
+                },
+                tb_rating: {
+                    select: {
+                        rating: true
+                    }
+                }
             }
         })
         .then((data) => {
@@ -66,14 +71,17 @@ module.exports = {
         const { body } = req;
         const newBody = {
           ...body,
+          
+        //   id_rating : Number (body.id_rating),
+          img_buku:req.file.path,
+
           id_kategori : Number (body.id_kategori),
           pages : Number (body.pages),
           isbn : Number (body.isbn),
           id_user : deCoded_id_user
         };
         console.log("ini user", newBody);
-        prisma.tb_buku
-          .create({
+        prisma.tb_buku.create({
             data: newBody,
           })
           .then((data) => {
@@ -114,6 +122,7 @@ module.exports = {
         const {body} = req 
         const newData = {
             ...body,
+            img_buku:req.file.path,
             id_user : Number (body.id_user),
             id_kategori : Number (body.id_kategori),
             pages : Number (body.pages),
