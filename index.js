@@ -1,6 +1,8 @@
+require('dotenv').config({});
 const express = require('express');
 const app = express();
 
+const port = process.env.PORT || 3000;
 
 const mainRoutes = require ('./src/routes');
 
@@ -11,6 +13,6 @@ app.use(express.urlencoded({extended : false}))
 app.use('/', mainRoutes);
 
 
-app.listen(3000, ()=> {
+app.listen(port, ()=> {
     console.log("server running at post 3000");
 });
