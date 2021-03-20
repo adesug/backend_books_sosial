@@ -2,7 +2,7 @@ require('dotenv').config({});
 const express = require('express');
 const app = express();
 
-const port = process.env.PORT || 3000;
+const port = process.env.PORT || 3001;
 
 const mainRoutes = require ('./src/routes');
 
@@ -14,5 +14,5 @@ app.use('/', mainRoutes);
 
 
 app.listen(port, ()=> {
-    console.log("server running at post 3000");
+    console.log("server running at post " + port);
 });

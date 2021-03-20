@@ -53,19 +53,22 @@ module.exports = {
         });
     },
     updateUsers : (req, res) => {
+        // const deCoded_id_user = req.decodeToken.id_user;
         const id_user = req.params.id_user;
-        // const {body} = req 
-        // const newData = {
-        //     ...body,
-        //     id_user : Number (body.id_user),
-        //     id_kategori : Number (body.id_kategori),
-        //     pages : Number (body.pages),
-        //     isbn : Number (body.isbn)
-        // }
+        const {body} = req 
+        const newData = {
+            ...body,
+            img_profil:req.file.path,
+            id_user : Number (body.id_user),
+            // id_user : deCoded_id_user
+
+            
+        }
         prisma.tb_user.update({
             where : {
                 id_user : parseInt(id_user)
-            }
+            },
+            data:newData
             
         })
         .then((data) => {

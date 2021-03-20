@@ -21,6 +21,12 @@ module.exports = {
                     select: {
                         rating: true
                     }
+                },
+                tb_diskusi:{
+                    select: {
+                        diskusi : true,
+                        id_user: true 
+                    }
                 }
             }
         })
