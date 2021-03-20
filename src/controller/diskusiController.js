@@ -51,6 +51,7 @@ module.exports = {
     updateDiskusi : (req,res) => {
         const deCode_id_user = req.decodeToken.id_user;
         const id_diskusi = req.params.id_diskusi;
+        const{body} = req
         const newData = {
             ...body,
             id_buku : Number (body.id_buku),
